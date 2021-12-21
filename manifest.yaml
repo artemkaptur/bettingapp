@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bettingapp
+spec:
+  selector:
+    app: bettingapp
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bettingapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bettingapp
+  template:
+    metadata:
+      labels:
+        app: bettingapp
+    spec:
+      containers:
+        - name: bettingapp
+          image: artsiomkaptur/bettingapp:v5

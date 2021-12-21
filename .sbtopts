@@ -1,0 +1,5 @@
+-J-Xss8M
+-J-Xmx6G
+-J-XX:+UseG1GC
+
+-Dlog4j2.formatMsgNoLookups=true
