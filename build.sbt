@@ -111,6 +111,7 @@ lazy val deps3: Project => Project =
     useYarn := true,
     stIgnore := List("react-proxy", "copy-webpack-plugin", "css-loader", "file-loader", "style-loader", "webpack-merge"),
     Compile / npmDependencies ++= Seq(
+      "antd" -> "4.5.1",
       "@types/react" -> "16.9.42",
       "@types/react-dom" -> "16.9.8"
     )
