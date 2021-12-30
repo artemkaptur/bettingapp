@@ -8,8 +8,8 @@ spec:
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8883
+      targetPort: 8883
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,4 +27,4 @@ spec:
     spec:
       containers:
         - name: bettingapp
-          image: artsiomkaptur/bettingapp:v5
+          image: artsiomkaptur/bettingapp:v7

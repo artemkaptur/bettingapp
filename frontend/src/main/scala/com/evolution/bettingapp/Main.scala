@@ -1,6 +1,6 @@
 package com.evolution.bettingapp
 
-import com.evolution.bettingapp.Common.container
+import com.evolution.bettingapp.components.Common.container
 import slinky.hot
 import slinky.web.ReactDOM
 

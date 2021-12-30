@@ -1,14 +1,14 @@
-package com.evolution.bettingapp.services
+package com.evolution.bettingapp.ajax
 
-import com.evolution.bettingapp.Common.container
-import com.evolution.bettingapp.{App, Sports}
+import com.evolution.bettingapp.App
+import com.evolution.bettingapp.components.Common.container
+import com.evolution.bettingapp.components.Sports
 import org.scalajs.dom.{XMLHttpRequest, window}
 import org.scalajs.dom.ext.Ajax
 import slinky.web.ReactDOM
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
-
 
 object AjaxApi {
 

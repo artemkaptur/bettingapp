@@ -1,6 +1,6 @@
 package com.evolution.bettingapp
 
-import com.evolution.bettingapp.services.AjaxApi.doLogin
+import com.evolution.bettingapp.ajax.AjaxApi.doLogin
 import slinky.core.Component
 import slinky.core.annotations.react
 import slinky.web.html._

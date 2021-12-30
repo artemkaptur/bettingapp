@@ -3,6 +3,7 @@ val CirceVersion = "0.13.0"
 val MunitVersion = "0.7.27"
 val LogbackVersion = "1.2.5"
 val MunitCatsEffectVersion = "1.0.5"
+val doobieVersion = "0.13.4"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
@@ -36,6 +37,14 @@ lazy val backend = (project in file("./backend"))
       "org.http4s" %% "http4s-circe" % Http4sVersion,
       "org.http4s" %% "http4s-dsl" % Http4sVersion,
       "io.circe" %% "circe-generic" % CirceVersion,
+      "org.flywaydb" % "flyway-core" % "7.15.0",
+      "org.postgresql" % "postgresql" % "42.3.1",
+      "com.github.jwt-scala" %% "jwt-core" % "9.0.2",
+      "com.github.jwt-scala" %% "jwt-json-common" % "9.0.2",
+      "com.github.jwt-scala" %% "jwt-circe" % "9.0.2",
+      "org.tpolecat" %% "doobie-core" % doobieVersion,
+      "org.tpolecat" %% "doobie-h2" % doobieVersion,
+      "org.tpolecat" %% "doobie-hikari" % doobieVersion,
       "org.scalameta" %% "munit" % MunitVersion % Test,
       "org.typelevel" %% "munit-cats-effect-2" % MunitCatsEffectVersion % Test,
       "ch.qos.logback" % "logback-classic" % LogbackVersion

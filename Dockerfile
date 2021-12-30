@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY ./target/universal/stage .
 
-EXPOSE 8080
+EXPOSE 8883
 
 CMD ["./bin/bettingapp"]

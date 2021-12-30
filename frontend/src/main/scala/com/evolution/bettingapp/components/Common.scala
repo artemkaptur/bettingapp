@@ -1,4 +1,4 @@
-package com.evolution.bettingapp
+package com.evolution.bettingapp.components
 
 import org.scalajs.dom
 
