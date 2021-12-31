@@ -1,12 +1,11 @@
 package com.evolution.bettingapp.components
 
-import com.evolution.bettingapp.ajax.AjaxApi.getGames
 import slinky.core.FunctionalComponent
 import slinky.core.annotations.react
 import slinky.web.html._
 import typings.antd.components.Layout
 
-@react object Sports {
+@react object Games {
   type Props = Unit
 
   val component: FunctionalComponent[Props] = FunctionalComponent[Props] { _ =>
@@ -17,10 +16,7 @@ import typings.antd.components.Layout
       ),
       Layout.Content(
         div(
-          button("Football", onClick := getGames("Football"))
-        ),
-        div(
-          button("Hockey")
+          h1("List of games")
         )
       ),
       Layout.Footer(className := "App-footer")(
@@ -30,6 +26,5 @@ import typings.antd.components.Layout
         )
       )
     )
-
   }
 }

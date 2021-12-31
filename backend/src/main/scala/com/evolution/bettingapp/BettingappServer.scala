@@ -14,7 +14,7 @@ object BettingappServer {
 
   def stream[F[_] : ConcurrentEffect](implicit T: Timer[F], xa: HikariTransactor[F]): Stream[F, Nothing] = {
     for {
-      httpApp <- Stream(BettingappRoutes.loginRoutes[F].orNotFound)
+      httpApp <- Stream(BettingappRoutes.bettingappRoutes[F].orNotFound)
       finalHttpApp = Logger.httpApp(true, true)(httpApp)
       exitCode <- BlazeServerBuilder[F](global)
         .bindHttp(8883, "0.0.0.0")
