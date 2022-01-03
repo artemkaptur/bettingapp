@@ -1,14 +1,15 @@
 package com.evolution.bettingapp.components
 
+import com.evolution.bettingapp.Game
 import slinky.core.FunctionalComponent
 import slinky.core.annotations.react
 import slinky.web.html._
 import typings.antd.components.Layout
 
 @react object Games {
-  type Props = Unit
+  case class Props(games: List[Game])
 
-  val component: FunctionalComponent[Props] = FunctionalComponent[Props] { _ =>
+  val component: FunctionalComponent[Props] = FunctionalComponent[Props] { props =>
 
     Layout(className := "App")(
       Layout.Header(className := "App-header")(
@@ -16,7 +17,7 @@ import typings.antd.components.Layout
       ),
       Layout.Content(
         div(
-          h1("List of games")
+          h1("List of games" + props.games)
         )
       ),
       Layout.Footer(className := "App-footer")(

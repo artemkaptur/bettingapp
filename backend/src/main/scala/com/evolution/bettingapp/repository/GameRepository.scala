@@ -12,7 +12,7 @@ trait GameRepositoryT[F[_]] {
 class GameRepository[F[_] : Async](implicit xa: HikariTransactor[F]) extends GameRepositoryT[F] {
 
   def gamesByType(gameType: GameType): F[List[Game]] = {
-    sql"""SELECT id, game_type, team1, team2 FROM games WHERE game_type = ${gameType.value}
+    sql"""SELECT id, game_type, team1, team2, score1, score2, coefficient1, coefficient2 FROM games WHERE game_type = ${gameType.value}
        """
       .query[Game]
       .to[List]

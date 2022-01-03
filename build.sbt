@@ -7,6 +7,8 @@ val doobieVersion = "0.13.4"
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+scalaVersion := "2.13.6"
+
 lazy val bettingapp = (project in file("."))
   .enablePlugins(JavaAppPackaging)
   .settings(
@@ -24,10 +26,21 @@ lazy val bettingapp = (project in file("."))
       "org.typelevel" %% "munit-cats-effect-2" % MunitCatsEffectVersion % Test,
       "ch.qos.logback" % "logback-classic" % LogbackVersion
     ))
-  .aggregate(backend, frontend)
+  .aggregate(backend, frontend, sharedJVM, sharedJS)
 
-lazy val backend = (project in file("./backend"))
+lazy val shared = (crossProject(JSPlatform, JVMPlatform) in file("shared"))
   .settings(
+    name := "bettingapp-shared",
+    scalaVersion := "2.13.6",
+    publish := {})
+  .configure(deps2)
+
+lazy val sharedJVM = shared.jvm
+lazy val sharedJS = shared.js
+
+lazy val backend = (project in file("backend"))
+  .settings(
+    scalaVersion := "2.13.6",
     name := "bettingapp-backend",
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.13.0" cross CrossVersion.full),
     addCompilerPlugin("com.olegpy" %% "better-monadic-for" % "0.3.1"),
@@ -50,6 +63,8 @@ lazy val backend = (project in file("./backend"))
       "ch.qos.logback" % "logback-classic" % LogbackVersion
     )
   )
+  .configure(deps2)
+  .dependsOn(sharedJVM)
 
 lazy val frontend = (project in file("./frontend"))
   .enablePlugins(
@@ -78,7 +93,7 @@ lazy val frontend = (project in file("./frontend"))
   deps1,
   deps2,
   deps3,
-)
+).dependsOn(sharedJS)
 
 lazy val deps1: Project => Project =
   _.settings(
@@ -110,7 +125,9 @@ lazy val deps2: Project => Project =
     libraryDependencies ++= Seq(
       "com.lihaoyi" %%% "autowire" % "0.3.2",
       "io.suzaku" %%% "boopickle" % "1.3.2",
-      "com.lihaoyi" %%% "upickle" % "1.2.2"
+      "com.lihaoyi" %%% "upickle" % "1.2.2",
+      "io.circe" %% "circe-generic" % CirceVersion,
+      "org.http4s" %% "http4s-circe" % Http4sVersion
     )
   )
 

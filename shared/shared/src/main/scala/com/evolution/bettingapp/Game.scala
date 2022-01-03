@@ -1,4 +1,4 @@
-package com.evolution.bettingapp.domain
+package com.evolution.bettingapp
 
 import cats.effect.Concurrent
 import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}

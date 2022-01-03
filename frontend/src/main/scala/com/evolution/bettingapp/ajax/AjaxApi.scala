@@ -1,8 +1,10 @@
 package com.evolution.bettingapp.ajax
 
 import com.evolution.bettingapp.App
+import com.evolution.bettingapp.Game
 import com.evolution.bettingapp.components.Common.container
 import com.evolution.bettingapp.components.{Games, Sports}
+import io.circe.Json
 import org.scalajs.dom.ext.Ajax
 import org.scalajs.dom.{XMLHttpRequest, window}
 import slinky.web.ReactDOM
@@ -30,8 +32,14 @@ object AjaxApi {
     Ajax.get(s"http://localhost:8883/games?gameType=$game")
       .onComplete {
         case Success(xhr: XMLHttpRequest) =>
-          println("1------------------->" + xhr.responseText)
-          ReactDOM.render(Games(), container)
+          val games = Json.fromString(xhr.response.toString).as[List[Game]]
+          for{
+            games2 <- games
+          } yield ReactDOM.render(Games(games2), container)
+//          games match {
+//            case Json.Null => window.alert("Something went wrong")
+//            case games         => ReactDOM.render(Games(games), container)
+//          }
         case Failure(ex)                  =>
           println("2------------------->" + ex)
           window.alert("Something went wrong")
