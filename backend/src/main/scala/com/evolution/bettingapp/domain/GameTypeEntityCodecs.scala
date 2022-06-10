@@ -1,16 +1,11 @@
 package com.evolution.bettingapp.domain
 
 import cats.effect.Concurrent
-import io.circe.{Decoder, Encoder}
-import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
+import com.evolution.bettingapp.GameType
 import org.http4s.circe.{accumulatingJsonOf, jsonEncoderOf}
 import org.http4s.{EntityDecoder, EntityEncoder}
 
-case class GameType private(value: String) extends AnyVal
-
-object GameType {
-  implicit val decoder: Decoder[GameType] = deriveDecoder[GameType]
-  implicit val encoder: Encoder[GameType] = deriveEncoder[GameType]
+object GameTypeEntityCodecs {
 
   implicit def entityDecoder[F[_] : Concurrent]: EntityDecoder[F, GameType] = accumulatingJsonOf
 

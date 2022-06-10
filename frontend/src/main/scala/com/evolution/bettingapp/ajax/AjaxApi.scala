@@ -32,15 +32,23 @@ object AjaxApi {
     Ajax.get(s"http://localhost:8883/games?gameType=$game")
       .onComplete {
         case Success(xhr: XMLHttpRequest) =>
-          val games = Json.fromString(xhr.response.toString).as[List[Game]]
-          for{
-            games2 <- games
-          } yield ReactDOM.render(Games(games2), container)
-//          games match {
-//            case Json.Null => window.alert("Something went wrong")
-//            case games         => ReactDOM.render(Games(games), container)
-//          }
-        case Failure(ex)                  =>
+          println("111111111")
+          val gamesEither = Json.fromString(xhr.responseText).as[Game].fold(l => {
+            l.printStackTrace()
+            Left(l.message)
+          }, Right(_))
+          println("2222222")
+          gamesEither match {
+            case Left(value) => window.alert(value)
+            case Right(game) => ReactDOM.render(Games(game), container)
+          }
+          println("333333333")
+
+        //          games match {
+        //            case Json.Null => window.alert("Something went wrong")
+        //            case games         => ReactDOM.render(Games(games), container)
+        //          }
+        case Failure(ex) =>
           println("2------------------->" + ex)
           window.alert("Something went wrong")
           ReactDOM.render(Sports(), container)

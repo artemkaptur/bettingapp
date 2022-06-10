@@ -126,8 +126,7 @@ lazy val deps2: Project => Project =
       "com.lihaoyi" %%% "autowire" % "0.3.2",
       "io.suzaku" %%% "boopickle" % "1.3.2",
       "com.lihaoyi" %%% "upickle" % "1.2.2",
-      "io.circe" %% "circe-generic" % CirceVersion,
-      "org.http4s" %% "http4s-circe" % Http4sVersion
+      "io.circe" %%% "circe-generic" % CirceVersion
     )
   )
 

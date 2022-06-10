@@ -2,13 +2,14 @@ package com.evolution.bettingapp.routes
 
 import cats.effect.Async
 import cats.implicits.{toFlatMapOps, toFunctorOps}
-import com.evolution.bettingapp.domain.{Creds, GameType}
+import com.evolution.bettingapp.GameType
+import com.evolution.bettingapp.domain.Creds
 import com.evolution.bettingapp.repository.{GameRepository, UserRepository}
 import com.evolution.bettingapp.services.{GameService, UserService}
 import doobie.hikari.HikariTransactor
+import org.http4s._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.headers.Authorization
-import org.http4s._
 
 object BettingappRoutes {
 
@@ -45,7 +46,7 @@ object BettingappRoutes {
           res <- gameService.getGames(gameType)
           resp <- res match {
             case Left(s)      => BadRequest(s)
-            case Right(games) => Ok(games)
+            case Right(games) => Ok(games.head)
           }
         } yield resp
       }.map(_.putHeaders(Header("Access-Control-Allow-Origin", "*")))

@@ -2,8 +2,8 @@ package com.evolution.bettingapp.services
 
 import cats.effect.Async
 import cats.implicits._
-import com.evolution.bettingapp.domain.{Game, GameType}
 import com.evolution.bettingapp.repository.GameRepositoryT
+import com.evolution.bettingapp.{Game, GameType}
 
 trait GameServiceT[F[_]] {
   def getGames(gameType: GameType): F[Either[String, List[Game]]]

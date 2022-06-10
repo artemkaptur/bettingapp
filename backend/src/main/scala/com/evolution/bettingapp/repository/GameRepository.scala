@@ -1,7 +1,7 @@
 package com.evolution.bettingapp.repository
 
 import cats.effect.Async
-import com.evolution.bettingapp.domain.{Game, GameType}
+import com.evolution.bettingapp.{Game, GameType}
 import doobie.hikari.HikariTransactor
 import doobie.implicits._
 
